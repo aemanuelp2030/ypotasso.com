@@ -35,21 +35,51 @@
   .phrase {
     font-size: 2.2rem;
     margin: 0;
-    color: #EE4B2B;
+    color: #fff;
+    white-space: pre-wrap;
+    overflow: hidden;
+    border-right: .15em solid #fff;
+    animation: blink-caret .75s step-end infinite;
   }
   .sub {
     font-size: 1.4rem;
     margin-top: 20px;
-    color: #888;
+    color: #fff;
+    opacity: 0;
+  }
+  @keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: #fff; }
   }
 </style>
 </head>
 <body>
 <div class="wrap">
   <div class="main">
-    <div class="phrase">FOR ME TO WIN<br>EVERYONE MUST HAVE LOST</div>
-    <div class="sub">THERE CAN ONLY BE ONE</div>
+    <div class="phrase" id="phrase"></div>
+    <div class="sub" id="sub">THERE CAN ONLY BE ONE</div>
   </div>
 </div>
+
+<script>
+  const phraseText = "FOR ME TO WIN\nEVERYONE MUST HAVE LOST";
+  const subText = document.getElementById('sub');
+  const phraseEl = document.getElementById('phrase');
+  let i = 0;
+
+  function typeWriter() {
+    if (i < phraseText.length) {
+      phraseEl.textContent += phraseText.charAt(i);
+      i++;
+      setTimeout(typeWriter, 80); // speed: 80ms per letter — adjust if too slow/fast
+    } else {
+      phraseEl.style.borderRight = 'none'; // kill cursor after done
+      subText.style.opacity = 1;
+      subText.style.transition = 'opacity 1s';
+    }
+  }
+
+  typeWriter();
+</script>
 </body>
 </html>
