@@ -71,7 +71,7 @@
     if (i < phraseText.length) {
       phraseEl.textContent += phraseText.charAt(i);
       i++;
-      setTimeout(typeWriter, 80); // speed: 80ms per letter — adjust if too slow/fast
+      setTimeout(typeWriter, 160); // speed: 80ms per letter — adjust if too slow/fast
     } else {
       phraseEl.style.borderRight = 'none'; // kill cursor after done
       subText.style.opacity = 1;
